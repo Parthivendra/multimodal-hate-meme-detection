@@ -2,6 +2,7 @@ import os
 import torch
 from torch.utils.data import Dataset
 from PIL import Image
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 class MemeDataset(Dataset):
     def __init__(self, df, img_dir, tokenizer=None, transform=None, max_length=128):
