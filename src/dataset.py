@@ -10,12 +10,12 @@ class MemeDataset(Dataset):
         self.tokenizer = tokenizer
         self.transform = transform
         self.max_length = max_length
-	self.lable_map = {
-		"not_offensive": 0,
-		"slight": 1,
-		"very_offensive": 2,
-		"hateful_offensive": 3
-		}
+    	self.lable_map = {
+    		"not_offensive": 0,
+	    	"slight": 1,
+	    	"very_offensive": 2,
+	    	"hateful_offensive": 3
+	    	}
 
     def __len__(self):
         return len(self.df)
