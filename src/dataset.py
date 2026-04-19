@@ -47,7 +47,7 @@ class MemeDataset(Dataset):
             image = self.transform(image)
 
         # ---- LABEL ----
-	lable = torch.tensor(self.lable_map[row["offensive"]], dtype=torch.long)
+        lable = torch.tensor(self.lable_map[row["offensive"]], dtype=torch.long)
 
         return {
             "input_ids": input_ids,
