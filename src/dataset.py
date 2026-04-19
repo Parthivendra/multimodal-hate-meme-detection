@@ -43,8 +43,12 @@ class MemeDataset(Dataset):
 
         # ---- IMAGE ----
         img_path = os.path.join(self.img_dir, row["image_name"])
-        image = Image.open(img_path).convert("RGB")
-
+        try:
+                image = Image.open(img_path).convert("RGB")
+        except Exception:
+                # fallback: create a blank image
+                image = Image.new("RGB", (224, 224), (0, 0, 0))
+        
         if self.transform:
             image = self.transform(image)
 
