@@ -10,7 +10,7 @@ class MemeDataset(Dataset):
         self.tokenizer = tokenizer
         self.transform = transform
         self.max_length = max_length
-    	self.lable_map = {
+        self.lable_map = {
     		"not_offensive": 0,
 	    	"slight": 1,
 	    	"very_offensive": 2,
