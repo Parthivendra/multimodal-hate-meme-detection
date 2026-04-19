@@ -10,6 +10,12 @@ class MemeDataset(Dataset):
         self.tokenizer = tokenizer
         self.transform = transform
         self.max_length = max_length
+	self.lable_map = {
+		"not_offensive": 0,
+		"slight": 1,
+		"very_offensive": 2,
+		"hateful_offensive": 3
+		}
 
     def __len__(self):
         return len(self.df)
@@ -18,7 +24,7 @@ class MemeDataset(Dataset):
         row = self.df.iloc[idx]
 
         # ---- TEXT ----
-        text = str(row["text"])
+        text = str(row["text_corrected"])
 
         if self.tokenizer:
             encoding = self.tokenizer(
@@ -41,7 +47,7 @@ class MemeDataset(Dataset):
             image = self.transform(image)
 
         # ---- LABEL ----
-        label = torch.tensor(row["label"], dtype=torch.long)
+	lable = torch.tensor(self.lable_map[row["offensive"]], dtype=torch.long)
 
         return {
             "input_ids": input_ids,
