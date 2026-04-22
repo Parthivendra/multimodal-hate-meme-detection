@@ -18,28 +18,6 @@ env/
 .ipynb_checkpoints/
 
 # ------------------------------
-# Data (DO NOT COMMIT DATASETS)
-# ------------------------------
-data/raw/
-data/processed/
-
-# ------------------------------
-# Model Outputs
-# ------------------------------
-outputs/checkpoints/
-outputs/logs/
-*.pt
-*.pth
-*.ckpt
-
-# ------------------------------
-# HuggingFace / Transformers
-# ------------------------------
-.cache/
-hf_cache/
-transformers_cache/
-
-# ------------------------------
 # Logs & Debug
 # ------------------------------
 logs/
