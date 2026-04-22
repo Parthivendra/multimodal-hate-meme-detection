@@ -43,6 +43,12 @@ def evaluate(model, loader, device, mode="text"):
             elif mode == "image":
                 images = batch["image"].to(device)
                 outputs = model(images)
+            elif mode == "multimodal":
+                input_ids = batch["input_ids"].to(device)
+                attention_mask = batch["attention_mask"].to(device)
+                images = batch["image"].to(device)
+
+                outputs = model(input_ids, attention_mask, images)
 
             preds = torch.argmax(outputs, dim=1)
 
