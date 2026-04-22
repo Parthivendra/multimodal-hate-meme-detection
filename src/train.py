@@ -23,8 +23,9 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
     return total_loss / len(loader)
     
 from sklearn.metrics import accuracy_score, f1_score
+import torch
 
-def evaluate(model, loader, device):
+def evaluate(model, loader, device, mode="text"):
     model.eval()
 
     all_preds = []
@@ -32,11 +33,17 @@ def evaluate(model, loader, device):
 
     with torch.no_grad():
         for batch in loader:
-            input_ids = batch["input_ids"].to(device)
-            attention_mask = batch["attention_mask"].to(device)
             labels = batch["label"].to(device)
 
-            outputs = model(input_ids, attention_mask)
+            if mode == "text":
+                input_ids = batch["input_ids"].to(device)
+                attention_mask = batch["attention_mask"].to(device)
+                outputs = model(input_ids, attention_mask)
+
+            elif mode == "image":
+                images = batch["image"].to(device)
+                outputs = model(images)
+
             preds = torch.argmax(outputs, dim=1)
 
             all_preds.extend(preds.cpu().numpy())
